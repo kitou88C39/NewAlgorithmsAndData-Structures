@@ -6,10 +6,10 @@ public class Main {
         int numOfMove = 0;
 
         // i が h から n - 1 までのループを書く
-        for (int i = /* */; i < /* */; i++) {
+        for (int i = h; i < n; i++) {
             // A_i を x に保存する
-
-            // 変数 j を用意する
+            int x = a[i];
+            int j = i - h;
 
             // j が 0 以上で、A_j が x より大きい間
             while (/* */) {
