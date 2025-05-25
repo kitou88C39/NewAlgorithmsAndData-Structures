@@ -12,11 +12,11 @@ public class Main {
             int j = i - h;
 
             // j が 0 以上で、A_j が x より大きい間
-            while (/* */) {
+            while (j >= 0 && a[j] > x) {
                 // A_j を h だけ右にずらす
-
+                a[j + h] = a[j];
                 // j を h だけ減らす
-
+                j -= h;
                 numOfMove++;
             }
 
