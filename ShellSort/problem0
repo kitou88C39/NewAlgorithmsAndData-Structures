@@ -21,6 +21,7 @@ public class Main {
             }
 
             // A_{j + h} に x を代入する
+            a[j + h] = x;
         }
 
         System.out.println(numOfMove);
