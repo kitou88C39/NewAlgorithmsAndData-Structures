@@ -2,71 +2,46 @@ import java.util.Scanner;
 
 public class Main {
 
-    // 配列の内容を出力するヘルパー関数 (今回は結果出力に不要だが残しておくのはOK)
-    static void print(int a[], int n) {
-        for (int i = 0; i < n; i++) {
-            if (i > 0)
-                System.out.print(" ");
-            System.out.print(a[i]);
-        }
-        System.out.println();
-    }
+    static void insertionSort(int a[], int n, int h) {
+        int numOfMove = 0;
 
-    // gap付き挿入ソート (要素の移動回数を返す)
-    static int insertionSort(int a[], int n, int h) {
-        int numOfMove = 0; // このh間隔での移動回数
-
-        // i は h から n-1 まで (h個飛ばしで未ソート部分の要素を取り出す)
         for (int i = h; i < n; i++) {
-            int x = a[i]; // 挿入する要素
-            int j = i;    // 挿入位置を探すためのインデックス
+            int x = a[i];
+            int j = i - h;
 
-            // j が h 以上 かつ a[j-h] が x より大きい間、要素を右にずらす
-            while (j >= h && a[j - h] > x) {
-                a[j] = a[j - h]; // a[j-h] を a[j] にずらす
-                j -= h;          // h 間隔でインデックスを左に移動
-                numOfMove++;     // 移動回数をカウント
+            while (j >= 0 && a[j] > x) {
+                a[j + h] = a[j];
+                j -= h;
+                numOfMove++;
             }
 
-            // x を適切な位置に挿入
-            a[j] = x;
+            a[j + h] = x;
         }
-        return numOfMove; // このh間隔での移動回数を返す
+
+        System.out.println(numOfMove);
     }
 
-    // シェルソートのメインロジック (合計移動回数を出力)
     static void shellSort(int a[], int n, int[] h, int k) {
-        int totalNumOfMove = 0; // 全体の移動回数を集計する変数
-
-        // 間隔 h の配列を順番に適用
         for (int i = 0; i < k; i++) {
-            // 各間隔 h[i] で挿入ソートを呼び出し、その移動回数を合計に加算
-            totalNumOfMove += insertionSort(a, n, h[i]);
+            insertionSort(a, n, h[i]);
         }
-
-        // 全体の移動回数を出力
-        System.out.println(totalNumOfMove);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt(); // 数列の要素数 n を読み込む
-
-        int a[] = new int[n]; // 要素数 n の整数配列 a を宣言
+        int n = sc.nextInt();
+        int a[] = new int[n];
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt(); // 配列 a の各要素を読み込む
+            a[i] = sc.nextInt();
         }
 
-        int k = sc.nextInt(); // 間隔列 h の要素数 k を読み込む
-
-        int h[] = new int[k]; // 間隔列 h を宣言
+        int k = sc.nextInt();
+        int h[] = new int[k];
         for (int i = 0; i < k; i++) {
-            h[i] = sc.nextInt(); // 間隔列 h の各要素を読み込む
+            h[i] = sc.nextInt();
         }
 
-        shellSort(a, n, h, k); // シェルソートを実行
-
-        sc.close(); // Scannerのリソースを解放
+        shellSort(a, n, h, k);
     }
 }
