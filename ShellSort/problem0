@@ -30,7 +30,7 @@ public class Main {
     static void shellSort(int[] a, int n, int[] h, int k) {
     for (int i = 0; i < k; i++) {
         // 間隔 h の挿入ソートを呼び出す
-        insertionSort(a, n, /* */);
+        insertionSort(a, n, h[i]);
     }
     }
 
