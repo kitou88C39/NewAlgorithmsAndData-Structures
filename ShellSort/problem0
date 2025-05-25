@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static void insertionSort(int[] a, int n, int h) {
+        int numOfMove = 0;
+
+        // i が h から n - 1 までのループを書く
+        for (int i = /* */; i < /* */; i++) {
+            // A_i を x に保存する
+
+            // 変数 j を用意する
+
+            // j が 0 以上で、A_j が x より大きい間
+            while (/* */) {
+                // A_j を h だけ右にずらす
+
+                // j を h だけ減らす
+
+                numOfMove++;
+            }
+
+            // A_{j + h} に x を代入する
+        }
+
+        System.out.println(numOfMove);
+    }
+
+    static void shellSort(int[] a, int n, int[] h, int k) {
+    for (int i = 0; i < k; i++) {
+        // 間隔 h の挿入ソートを呼び出す
+        insertionSort(a, n, /* */);
+    }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int k = sc.nextInt();
+
+        int[] h = new int[k];
+        for (int i = 0; i < k; i++) {
+            h[i] = sc.nextInt();
+        }
+
+        shellSort(a, n, h, k);
+    }
+}
