@@ -23,6 +23,8 @@ public class Main {
         l[nl] = INF;
         r[nr] = INF;
         // lIndex, rIndex を 0 に初期化
+        int lIndex = 0;
+        int rIndex = 0;
 
         for (int i = left; i < right; i++) {
             // l と r の先頭要素のうち l の先頭要素が小さいなら
