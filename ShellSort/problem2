@@ -20,6 +20,8 @@ public class Main {
             r[i] = a[mid + i];
         }
         // 番兵を追加
+        l[nl] = INF;
+        r[nr] = INF;
         // lIndex, rIndex を 0 に初期化
 
         for (int i = left; i < right; i++) {
