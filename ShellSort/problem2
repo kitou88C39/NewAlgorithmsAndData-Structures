@@ -55,7 +55,7 @@ public class Main {
         mergeSort(a, left, mid);
         mergeSort(a, mid, right);
         // merge(a, left, mid, right) を呼び出す
-        merge(a, left, mid, right );
+        merge(a, left, mid, right);
     }
 
     public static void main(String[] args) {
