@@ -30,10 +30,14 @@ public class Main {
             // l と r の先頭要素のうち l の先頭要素が小さいなら
             if (l[lIndex] < r[rIndex]) {
                 // l の先頭要素を元の配列に格納
+                a[i] = l[lIndex];
                 // l の先頭を 1 つ進める
+                lIndex++;
             } else {
                 // r の先頭要素を元の配列に格納
+                a[i] = r[rIndex];
                 // r の先頭を 1 つ進める
+                rIndex++;
                 count++;
             }
         }
