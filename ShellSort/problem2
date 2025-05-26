@@ -45,10 +45,17 @@ public class Main {
 
     static void mergeSort(int[] a, int left, int right) {
         // もし、left が right-1 以上なら終了
+        if(left >= right -1) {
+            return;
+        }
 
         // mid に (left+right)/2 を代入
+        int mid = (left + right) / 2;
         // mergeSort(a, left, mid) と mergeSort(a, mid, right) を呼び出す
+        mergeSort(a, left, mid);
+        mergeSort(a, mid, right);
         // merge(a, left, mid, right) を呼び出す
+        merge(a, left, mid, right );
     }
 
     public static void main(String[] args) {
