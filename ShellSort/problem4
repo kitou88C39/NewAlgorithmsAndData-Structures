@@ -17,6 +17,8 @@ public class Main {
             // もし a[i] が pivot より小さいなら
             if (a[i] < pivot) {
                 // a[curIndex] と a[i] を交換
+                int cp = a[curIndex];
+                a[i] = cp;  
                 // curIndex を 1 だけ増やす
                 count++;
             }
