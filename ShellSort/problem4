@@ -9,12 +9,13 @@ public class Main {
         if (left >= right-1) {
             return;
         }
-
         // pivot に a[right-1] を代入
+        int pivot = a[right-1]; 
+
         // curIndex を left で初期化
         for (int i = left; i < right - 1; i++) {
             // もし a[i] が pivot より小さいなら
-            if (/* */) {
+            if (a[i] < pivot) {
                 // a[curIndex] と a[i] を交換
                 // curIndex を 1 だけ増やす
                 count++;
