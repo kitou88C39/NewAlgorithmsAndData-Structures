@@ -6,6 +6,9 @@ public class Main {
 
     static void quickSort(int[] a, int left, int right) {
         // もし left が right-1 以上なら終了
+        if (left >= right-1) {
+            return;
+        }
 
         // pivot に a[right-1] を代入
         // curIndex を left で初期化
