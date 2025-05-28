@@ -18,14 +18,15 @@ public class Main {
             if (a[i] < pivot) {
                 // a[curIndex] と a[i] を交換
                 int cp = a[curIndex];
-                a[i] = cp;  
+                a[i] = cp;
                 // curIndex を 1 だけ増やす
                 count++;
             }
         }
 
         // ピボットと a[curIndex] を交換
-
+        a[right-1] = a[curIndex];
+        a[curIndex] = pivot;
         // quickSort(a, left, curIndex) を呼び出す
         // quickSort(a, curIndex+1, right) を呼び出す
     }
