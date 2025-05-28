@@ -2,39 +2,48 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int count = 0;
+    static int count = 0; // スワップの回数をカウントするグローバル変数
 
-    static void quickSort(int a[], int left, int right) {
-        if (left >= right - 1) {
-            return;
-        }
-
+    static int partition(int[] a, int left, int right) {
         int pivot = a[right - 1];
+        int i = left;
 
-        int curIndex = left;
-        for (int i = left; i < right - 1; i++) {
-            if (a[i] < pivot) {
-                int cp = a[curIndex];
-                a[curIndex] = a[i];
-                a[i] = cp;
-                curIndex++;
-                count++;
+        for (int j = left; j < right - 1; j++) {
+            if (a[j] <= pivot) {
+                if (i != j) {
+                    int temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                    count++;
+                }
+                i++;
             }
         }
 
-        a[right - 1] = a[curIndex];
-        a[curIndex] = pivot;
+        // ★ ここが重要な修正点：実際に値が異なる時のみスワップ
+        if (a[i] != a[right - 1]) {
+            int temp = a[i];
+            a[i] = a[right - 1];
+            a[right - 1] = temp;
+            count++;
+        }
 
-        quickSort(a, left, curIndex);
-        quickSort(a, curIndex, right);
+        return i;
+    }
+
+    static void quickSort(int[] a, int left, int right) {
+        if (left >= right - 1) return;
+
+        int pivotIndex = partition(a, left, right);
+        quickSort(a, left, pivotIndex);
+        quickSort(a, pivotIndex + 1, right);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
-
-        int a[] = new int[n];
+        int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
@@ -42,13 +51,12 @@ public class Main {
         quickSort(a, 0, n);
 
         for (int i = 0; i < n; i++) {
-            if (i > 0) {
-                System.out.print(" ");
-            }
+            if (i > 0) System.out.print(" ");
             System.out.print(a[i]);
         }
         System.out.println();
-
         System.out.println(count);
+
+        sc.close();
     }
 }
