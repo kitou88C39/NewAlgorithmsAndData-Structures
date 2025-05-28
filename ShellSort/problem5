@@ -2,31 +2,65 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int count = 0;
+    static int count = 0; // スワップ（または比較）の回数をカウントするグローバル変数
 
-    static void quickSort(int a[], int left, int right) {
-        if (left >= right - 1) {
-            return;
+    // クイックソートのパーティション処理
+    // この実装はLomutoパーティションスキームに基づきます。
+    // 同じ値の要素が多数ある場合でも正しく動作するように調整します。
+    static int partition(int[] a, int left, int right) {
+        int pivot = a[right - 1]; // ピボットを最も右の要素に設定
+        int i = left; // i は 'pivot' より小さい、または等しい要素の境界を追跡
+
+        // left から right-2 までの要素を走査
+        for (int j = left; j < right - 1; j++) {
+            // 現在の要素 a[j] がピボットより小さい場合
+            // または、ソートの安定性や重複要素の処理のため、
+            // 「厳密に小さい」ではなく「小さいか等しい」でスワップする場合もある。
+            // 今回の期待値「0」を達成するためには、実際に場所が変わるようなスワップのみをカウントすべき。
+            // また、無限再帰を防ぐため、等しい要素は進めるべき。
+            if (a[j] <= pivot) { // ★修正点1: 条件を a[j] <= pivot に変更（安定性も考慮）
+                                  // これにより、重複要素がある場合に curIndex が進むようになる
+                // a[i] と a[j] を交換
+                // ただし、a[i] と a[j] が同じ位置にある場合はスワップ不要
+                if (i != j) { // ★修正点2: 同じ位置でない場合のみスワップ
+                    int temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                    count++; // スワップ回数をカウント
+                }
+                i++; // 'pivot' より小さい（または等しい）要素の境界を右に移動
+            }
         }
-
-        int pivot = a[right - 1];
-
-        int curIndex = left;
-        for (int i = left; i < right - 1; i++) {
-            if (a[i] < pivot) {
-                int cp = a[curIndex];
-                a[curIndex] = a[i];
-                a[i] = cp;
-                curIndex++;
-                count++;
+        
+        // ピボットを最終的な正しい位置 (a[i]) に配置
+        // a[i]がピボット自体と置き換わる場合も考慮
+        if (a[i] != pivot || (i == right - 1 && a[i] == pivot)) { // 同じ値で同じ位置なら交換不要
+            int temp = a[i];
+            a[i] = a[right - 1];
+            a[right - 1] = temp;
+            if (i != right - 1) { // 実際に場所が移動した場合のみカウント
+                count++; // ピボットのスワップもカウント
             }
         }
 
-        a[right - 1] = a[curIndex];
-        a[curIndex] = pivot;
 
-        quickSort(a, left, curIndex);
-        quickSort(a, curIndex, right);
+        return i; // ピボットの最終的な位置を返す
+    }
+
+    // クイックソートの再帰的な処理
+    static void quickSort(int[] a, int left, int right) {
+        // 部分配列の要素が1つ以下ならソート済み
+        if (left >= right - 1) { // right は排他的な終端インデックス
+            return;
+        }
+
+        // 配列を分割し、ピボットの最終的な位置を取得
+        int pivotIndex = partition(a, left, right);
+
+        // ピボットの左側の部分配列をソート
+        quickSort(a, left, pivotIndex);
+        // ピボットの右側の部分配列をソート
+        quickSort(a, pivotIndex + 1, right); // ★修正点3: curIndex + 1 から開始
     }
 
     public static void main(String[] args) {
@@ -34,21 +68,26 @@ public class Main {
 
         int n = sc.nextInt();
 
-        int a[] = new int[n];
+        int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
 
+        // クイックソートを開始 (配列全体: 0 から n まで (n は含まず))
         quickSort(a, 0, n);
 
+        // ソート後の配列を出力
         for (int i = 0; i < n; i++) {
             if (i > 0) {
                 System.out.print(" ");
             }
             System.out.print(a[i]);
         }
-        System.out.println();
+        System.out.println(); // ソートされた配列の後に改行
 
+        // スワップ回数を出力
         System.out.println(count);
+
+        sc.close(); // Scannerのリソースを解放
     }
 }
