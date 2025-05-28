@@ -28,9 +28,9 @@ public class Main {
         a[right-1] = a[curIndex];
         a[curIndex] = pivot;
         // quickSort(a, left, curIndex) を呼び出す
-        quickSort(a, left, curIndex)
+        quickSort(a, left, curIndex);
         // quickSort(a, curIndex+1, right) を呼び出す
-        quickSort(a, curIndex+1, right)
+        quickSort(a, curIndex+1, right);
     }
 
     public static void main(String[] args) {
