@@ -2,41 +2,38 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int count = 0; // スワップの回数をカウントするグローバル変数
-
-    static int partition(int[] a, int left, int right) {
-        int pivot = a[right - 1];
-        int i = left;
-
-        for (int j = left; j < right - 1; j++) {
-            if (a[j] <= pivot) {
-                if (i != j) {
-                    int temp = a[i];
-                    a[i] = a[j];
-                    a[j] = temp;
-                    count++;
-                }
-                i++;
-            }
-        }
-
-        // ★ ここが重要な修正点：実際に値が異なる時のみスワップ
-        if (a[i] != a[right - 1]) {
-            int temp = a[i];
-            a[i] = a[right - 1];
-            a[right - 1] = temp;
-            count++;
-        }
-
-        return i;
-    }
+    static int count = 0; // スワップ回数
 
     static void quickSort(int[] a, int left, int right) {
         if (left >= right - 1) return;
 
-        int pivotIndex = partition(a, left, right);
-        quickSort(a, left, pivotIndex);
-        quickSort(a, pivotIndex + 1, right);
+        int pivot = a[right - 1];
+        int curIndex = left;
+
+        for (int i = left; i < right - 1; i++) {
+            if (a[i] < pivot) {
+                if (i != curIndex) {
+                    swap(a, i, curIndex);
+                    count++;
+                }
+                curIndex++;
+            }
+        }
+
+        // ピボットを正しい位置へ（異なる位置に移動する場合のみカウント）
+        if (curIndex != right - 1) {
+            swap(a, curIndex, right - 1);
+            count++;
+        }
+
+        quickSort(a, left, curIndex);
+        quickSort(a, curIndex + 1, right);
+    }
+
+    static void swap(int[] a, int i, int j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
     }
 
     public static void main(String[] args) {
@@ -55,8 +52,7 @@ public class Main {
             System.out.print(a[i]);
         }
         System.out.println();
-        System.out.println(count);
 
-        sc.close();
+        System.out.println(count);
     }
 }
