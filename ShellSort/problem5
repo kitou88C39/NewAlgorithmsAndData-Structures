@@ -13,7 +13,7 @@ public class Main {
 
         int curIndex = left;
         for (int i = left; i < right - 1; i++) {
-            if (a[i] < pivot) {
+            if (a[i] <= pivot) {
                 int cp = a[curIndex];
                 a[curIndex] = a[i];
                 a[i] = cp;
