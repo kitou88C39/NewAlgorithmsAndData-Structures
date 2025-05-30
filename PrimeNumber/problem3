@@ -4,20 +4,24 @@ public class Main {
     // 整数を受け取り、素数かどうかを判定する関数
     static boolean primalityTest(long n) {
         if (n == 1) {
-            return false;
+            return false; // 1 は素数ではない
         }
-        for (long i = 2; /* */ ; i++) {
+        // 最適化: 2 から √n までの数で n が割り切れるかチェック
+        // i * i <= n は i <= Math.sqrt(n) と同じ意味で、
+        // 浮動小数点数を使わないため、より正確で高速
+        for (long i = 2; i * i <= n; i++) { // ★修正点
             if (n % i == 0) {
-                return false;
+                return false; // 割り切れたら素数ではない
             }
         }
-        return true;
+        // ループを抜けた場合、2から√nまでの間に約数がなかったため、素数である
+        return true; // 素数である
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        long n = sc.nextLong();
+        long n = sc.nextLong(); // long 型で入力を受け取る
 
         boolean isPrime = primalityTest(n);
 
@@ -26,5 +30,6 @@ public class Main {
         } else {
             System.out.println("NO");
         }
+        sc.close(); // Scannerを閉じる
     }
 }
