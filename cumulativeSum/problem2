@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n, x, y;
+        n = sc.nextInt();
+        x = sc.nextInt();
+        y = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        // ここにコードを書く
+        // 累積和を格納する長さ n+1 の配列 s を宣言し、0で初期化
+        int[] s = new int[n + 1];
+        s[0] = 0; // s[0]は先頭0個の要素の和なので0
+
+        // 累積和 s を計算
+        // s[k] には a[0] から a[k-1] までの和が格納される (つまり、元の配列の k番目までの和)
+        for (int i = 0; i < n; i++) {
+            s[i+1] = s[i] + a[i];
+        }
+
+        // x番目からy番目までの要素の和を計算
+        // 1-indexed の x番目から y番目までの和は、
+        // s[y] (先頭からy番目までの和) から s[x-1] (先頭からx-1番目までの和) を引くことで求められる
+        int subArraySum = s[y] - s[x-1];
+
+        // 結果を出力
+        System.out.println(subArraySum);
+
+        sc.close(); // Scannerを閉じる
+    }
+}
