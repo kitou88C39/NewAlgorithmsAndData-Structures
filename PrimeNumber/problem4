@@ -5,8 +5,16 @@ public class Main {
         boolean[] isPrime = new boolean[n + 1];
         Arrays.fill(isPrime, true);
         isPrime[0] = isPrime[1] = false;
+
         for(int i = 2; i <= n; i++) {
-            
+            if (isPrime[i]){
+                continue;
+            }
+            for(int j = i * 2; j <= n; j += i ){
+                isPrime[0] = false;
+            }
+        }
+
         }
         return isPrime;
     }
