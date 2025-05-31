@@ -1,0 +1,15 @@
+public class Main {
+    // 整数を受け取り、素数かどうかをフェルマーテストによって判定する関数
+    static boolean fermatTest(int n) {
+    }
+
+    public static void main(String[] args) {
+        int n = 813;
+        boolean isPrime = fermatTest(n);
+        if(isPrime){
+            System.out.println(n + "は素数");
+        }else{
+            System.out.println(n + "は素数ではない");
+        }
+    }
+}
