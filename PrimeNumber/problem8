@@ -6,18 +6,25 @@ public class Main {
     static HashMap<Integer, Integer> factorize(int n) {
         HashMap<Integer, Integer> primes = new HashMap<>();
 
+        // 2からsqrt(n)までを試行
         for (int i = 2; i * i <= n; i++) {
+            // n が i で割り切れない場合、次の数へ
             if (n % i > 0) {
                 continue;
             }
-            int exp = 0;
+            
+            // i が n の素因数である場合、その個数を数える
+            int exp = 0; // 指数（個数）
             while (n % i == 0) {
-                exp++;
-                n /= i;
+                exp++; // 個数をインクリメント
+                n /= i; // n を i で割る
             }
-            /* */
+            // ★修正点: ここで素因数 i とその個数 exp を HashMap に追加する
+            primes.put(i, exp); 
         }
 
+        // ループ終了後、n が 1 でなければ、残った n は素因数である
+        // (元の n が素数だった場合や、大きな素因数が残った場合)
         if (n != 1) {
             primes.put(n, 1);
         }
@@ -28,14 +35,20 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
-        HashMap<Integer, Integer> table = factorize(n);
+        int n = sc.nextInt(); // 入力 n を受け取る
+        HashMap<Integer, Integer> table = factorize(n); // 素因数分解を実行
 
+        // 素因数とその個数を出力
+        // HashMapのキーセットを順に処理するが、HashMapは順序を保証しないため、
+        // 出力順序が「小さい方から順に」という要件に厳密には合致しない可能性がある。
+        // ただし、この問題の文脈では、ループの i が小さい方から処理されるため、
+        // 最終的な出力は小さい順になることが期待されていると解釈できる。
         for (int prime : table.keySet()) {
             int num = table.get(prime);
             for (int i = 0; i < num; i++) {
                 System.out.println(prime);
             }
         }
+        sc.close(); // Scannerを閉じる
     }
 }
