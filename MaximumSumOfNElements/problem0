@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n, k;
+        n = sc.nextInt();
+        k = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        // 累積和を格納する長さ n+1 の配列 s を 0 で初期化
+        // i を 0 から n-1 まで繰り返す
+        // s[i+1] に s[i] + a[i] を代入
+
+        // 暫定最大値を格納する変数 maxSum を 0 で初期化
+        // i を 0 から n-k まで繰り返す
+        // もし s[i+k]-s[i] が maxSum より大きければ
+        // maxSum を s[i+k]-s[i] で更新
+
+        // maxSum を出力
+    }
+}
