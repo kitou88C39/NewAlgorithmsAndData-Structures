@@ -18,7 +18,7 @@ public class Main {
             primes.put(i, exp);
         }
 
-        if (n != 1) {
+        if (n != 1) { // 最後に残った n が素数であれば追加
             primes.put(n, 1);
         }
 
@@ -27,11 +27,15 @@ public class Main {
 
     // 整数を受け取り、約数の個数を返す関数
     static int calcNumOfPrimeFactors(int n) {
-        HashMap<Integer, Integer> primes = factorize(n);
+        HashMap<Integer, Integer> primes = factorize(n); // 素因数分解の結果を取得
 
         int numOfPrimeFactors = 1;
         
-        /* */
+        // ★修正点: ここに約数の個数を計算するロジックを追加
+        // primes HashMap の value (素因数の指数) をループし、(指数 + 1) を掛け合わせる
+        for (int exp : primes.values()) {
+            numOfPrimeFactors *= (exp + 1);
+        }
 
         return numOfPrimeFactors;
     }
@@ -39,10 +43,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int n = sc.nextInt();
+        int n = sc.nextInt(); // 入力 n を受け取る
 
-        int numOfPrimeFactors = calcNumOfPrimeFactors(n);
+        int numOfPrimeFactors = calcNumOfPrimeFactors(n); // 約数の個数を計算
 
-        System.out.println(numOfPrimeFactors);
+        System.out.println(numOfPrimeFactors); // 結果を出力
+        sc.close(); // Scannerを閉じる
     }
 }
