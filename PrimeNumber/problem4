@@ -13,7 +13,6 @@ public class Main {
             for(int j = i * 2; j <= n; j += i ){
                 isPrime[0] = false;
             }
-        }
 
         }
         return isPrime;
