@@ -25,7 +25,9 @@ public class Main {
     }
 
     static int calcGcd(int a, int b) {
-
+        HashMap<Integer, Integer> primesA = factorize(a);
+        HashMap<Integer, Integer> primesB = factorize(b);
+        HashMap<Integer, Integer> tableGcd = new HashMap<>();
     }
 
     public static void main(String[] args) {
