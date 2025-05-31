@@ -25,11 +25,12 @@ public class Main {
         // i を 0 から n-k まで繰り返す
         for (int i = 0; i < n-k; i ++){
         // もし s[i+k]-s[i] が maxSum より大きければ
-        if (maxSum <s[i+k]-s[i] ){}
-
-        }
+        if (maxSum <s[i+k]-s[i]){}
         // maxSum を s[i+k]-s[i] で更新
-
+            maxSum <s[i+k]-s[i];
+        }
+    }
         // maxSum を出力
+        System.out.println(maxSum);
     }
 }
