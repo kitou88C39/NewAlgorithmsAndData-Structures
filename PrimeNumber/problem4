@@ -1,0 +1,18 @@
+import java.util.Arrays;
+
+public class Main {
+    static boolean[] eratosthenes(int n) {
+    }
+
+    public static void main(String[] args) {
+        int n = 813;
+        boolean[] isPrime = eratosthenes(n);
+        for(int i = 1; i <= n; i++){
+            if(isPrime[i]){
+                System.out.println(i + "は素数");
+            }else{
+                System.out.println(i + "は素数ではない");
+            }
+        }
+    }
+}
