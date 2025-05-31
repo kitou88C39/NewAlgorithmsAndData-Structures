@@ -28,7 +28,16 @@ public class Main {
         HashMap<Integer, Integer> primesA = factorize(a);
         HashMap<Integer, Integer> primesB = factorize(b);
         HashMap<Integer, Integer> tableGcd = new HashMap<>();
+
+        for (int prime : tableA.keySet()) {
+            int exp = tableA.keySet(prime);
+            if (primesB.containsKey(prime)){
+                exp = Math.max(exp, primesB.get(prime));
+                tableGcd.put(prime, exp);
+            }
+        }
     }
+
 
     public static void main(String[] args) {
         int a = 30;
