@@ -13,5 +13,32 @@ public class Main {
         }
 
         // ここにコードを書く
+
+        // 1. 最初の k 個の要素の和を計算し、初期の maxSum と currentWindowSum とする
+        int currentWindowSum = 0;
+        for (int i = 0; i < k; i++) {
+            currentWindowSum += a[i];
+        }
+        int maxSum = currentWindowSum;
+
+        // 2. ウィンドウをスライドさせる
+        // ループは、a[k] から始まり、最後の要素 a[n-1] まで処理する
+        // i はウィンドウの「新しい要素」のインデックス
+        for (int i = k; i < n; i++) {
+            // ウィンドウを一つ右にスライド
+            // 窓から出る要素: a[i - k]
+            // 窓に入る要素: a[i]
+            currentWindowSum = currentWindowSum - a[i - k] + a[i];
+
+            // 現在のウィンドウの和と maxSum を比較し、最大値を更新
+            if (currentWindowSum > maxSum) {
+                maxSum = currentWindowSum;
+            }
+        }
+
+        // 3. 結果を出力
+        System.out.println(maxSum);
+
+        sc.close(); // Scannerを閉じる
     }
 }
