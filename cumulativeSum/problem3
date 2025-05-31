@@ -22,5 +22,21 @@ public class Main {
         }
 
         // ここにコードを書く
+        // 累積和を格納する長さ n の配列 s を宣言
+        int[] s = new int[n];
+
+        // s[0] は最初の要素 a[0] そのもの
+        s[0] = a[0];
+
+        // a の要素を使って累積和 s を計算
+        // s[i] には a[0] から a[i] までの和が格納される
+        for (int i = 1; i < n; i++) {
+            s[i] = s[i-1] + a[i];
+        }
+
+        // 計算した累積和の配列 s を出力
+        printArray(s);
+
+        sc.close(); // Scannerを閉じる
     }
 }
