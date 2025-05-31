@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+public class Main {
+    // 整数を受け取り、素数かどうかをフェルマーテストによって判定する関数
+    
+
+    // n が大きい場合、int ではなく long を使用する方が安全ですが、
+    // 問題の制約がintの範囲内であればintでも問題ありません。
+    // 今回の例 (837) は int の範囲内です。
+    static boolean fermatTest(int n) {
+        int a = 2; // パラメータ a の値は 2 で固定
+
+        // nが1の場合は素数ではない
+        if (n == 1) {
+            return false;
+        }
+
+        // nがa（ここでは2）で割り切れる場合
+        // nが2自身であれば素数、そうでなければ素数ではない
+        if (n % a == 0) {
+            return n == a; // nが2ならtrue、それ以外の偶数ならfalse
+        }
+
+        // フェルマーテストの計算: a^(n-1) mod n
+        // 結果を格納する変数。a^0 = 1 で初期化。
+        long fermat = 1; 
+
+        // n-1 回 a を掛けて、その都度 n で剰余を取る (modular exponentiation)
+        // 注意: n-1 はintの範囲内で大きくなり得るため、fermatをlongにするのが安全
+        for (int i = 0; i < n - 1; i++) {
+            // fermat = (fermat * a) % n; の計算
+            // 途中の積がintの最大値を超える可能性があるため、longで計算してから%n
+            fermat = (fermat * a);
+            // 途中のfermatがnより大きくなったらmod nを取る
+            // (fermat % n)は不要だが、long型の上限を超えないように剰余計算を挟む
+            fermat = fermat % n; 
+        }
+
+        // フェルマーの小定理により、a^(n-1) % n が 1 であれば「おそらく素数」
+        // そうでなければ「合成数」と判定
+        return fermat == 1; // 最終的な判定
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(); // int 型で入力を受け取る
+
+        boolean isPrime = fermatTest(n);
+
+        if(isPrime){
+            System.out.println("YES");
+        }else{
+            System.out.println("NO");
+        }
+        sc.close(); // Scannerを閉じる
+    }
+}
