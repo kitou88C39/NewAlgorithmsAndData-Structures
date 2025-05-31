@@ -1,0 +1,48 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main {
+    // 整数を受け取り、素因数分解をおこなって (素因数、個数) の連想配列を返す関数
+    static HashMap<Integer, Integer> factorize(int n) {
+        HashMap<Integer, Integer> primes = new HashMap<>();
+
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i > 0) {
+                continue;
+            }
+            int exp = 0;
+            while (n % i == 0) {
+                exp++;
+                n /= i;
+            }
+            primes.put(i, exp);
+        }
+
+        if (n != 1) {
+            primes.put(n, 1);
+        }
+
+        return primes;
+    }
+
+    // 整数を受け取り、約数の個数を返す関数
+    static int calcNumOfPrimeFactors(int n) {
+        HashMap<Integer, Integer> primes = factorize(n);
+
+        int numOfPrimeFactors = 1;
+        
+        /* */
+
+        return numOfPrimeFactors;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        int numOfPrimeFactors = calcNumOfPrimeFactors(n);
+
+        System.out.println(numOfPrimeFactors);
+    }
+}
