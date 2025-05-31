@@ -36,6 +36,14 @@ public class Main {
                 tableGcd.put(prime, exp);
             }
         }
+        int gcd = 1;
+        for (int prime : tableGcd.keySet()){
+            int exp = tableGcd.get(prime);
+            for (int i = 0; i < exp; i++){
+                gcd *= prime;
+            }
+        }
+        return gcd;
     }
 
 
