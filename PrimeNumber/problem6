@@ -3,10 +3,16 @@ public class Main {
     static boolean fermatTest(int n) {
         int a = 2;
 
-        if (n % 2 == 0){
+        if (n % a == 0){
             return false;
         }
         int fermat = 1;
+
+        for (int i = 0; i < n -1; i++ ){
+            fermat *= a;
+            fermat %= n;
+        }
+        return fermat % n == 1;
     }
 
     public static void main(String[] args) {
