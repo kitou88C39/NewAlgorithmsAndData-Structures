@@ -14,5 +14,24 @@ public class Main {
         }
 
         // ここにコードを書く
+        int evenCount = 0; // 偶数の個数を数える変数
+        int oddCount = 0;  // 奇数の個数を数える変数
+
+        // 配列 a の x 番目から y 番目までの要素をループ
+        for (int i = x; i <= y; i++) {
+            if (a[i] % 2 == 0) {
+                // 偶数であれば evenCount をインクリメント
+                evenCount++;
+            } else {
+                // 奇数であれば oddCount をインクリメント
+                oddCount++;
+            }
+        }
+
+        // 結果を出力
+        System.out.println(evenCount);
+        System.out.println(oddCount);
+
+        sc.close(); // Scannerを閉じる
     }
 }
