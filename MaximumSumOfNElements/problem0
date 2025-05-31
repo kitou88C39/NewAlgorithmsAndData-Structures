@@ -14,17 +14,18 @@ public class Main {
 
         // 累積和を格納する長さ n+1 の配列 s を 0 で初期化
         int[] s = new int[n+1];
+        // i を 0 から n-1 まで繰り返す
         for (int i = 0; i < n; i++){
+        // s[i+1] に s[i] + a[i] を代入
             s[i+1] = s[i] + a[i];
         }
-        // i を 0 から n-1 まで繰り返す
-        // s[i+1] に s[i] + a[i] を代入
-
         // 暫定最大値を格納する変数 maxSum を 0 で初期化
+        int maxSum = 0;
+
         // i を 0 から n-k まで繰り返す
         // もし s[i+k]-s[i] が maxSum より大きければ
         // maxSum を s[i+k]-s[i] で更新
 
         // maxSum を出力
     }
-
+}
