@@ -10,44 +10,8 @@ public class Main {
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
-        }Exception in thread "main" java.util.NoSuchElementException
-	at java.base/java.util.Scanner.throwFor(Scanner.java:941)
-	at java.base/java.util.Scanner.next(Scanner.java:1598)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2263)
-	at java.base/java.util.Scanner.nextInt(Scanner.java:2217)
-	at Main.main(Main.java:8)
-(Exit status: 1)
-        // 累積和を格納する長さ n+1 の配列 s を 0 で初期化
-        int[] s = new int[n + 1];
-        // i を 0 から n-1 まで繰り返す
-        for (int i = 0; i < n; i++) {
-        // s[i+1] に s[i] + a[i] を代入
-            s[i+1] = s[i] + a[i];
         }
-        
-        // 暫定最大値を格納する変数 maxSum を初期化
-        // maxSum の初期値は、取りうる最初の部分列の和とするのが安全です。
-        // もし配列の要素が負の数を含む可能性がある場合、0だと正しい最大値にならないことがあります。
-        // ここでは、最初のk個の和 s[k] - s[0] で初期化するのが最も安全です。
-        int maxSum = s[k] - s[0]; // 最初のK個の和で初期化
 
-        // i を 0 から n-k まで繰り返す
-        // このループは、長さkの部分配列の開始インデックスをiとする。
-        // 最後の部分配列は a[n-k] から a[n-1] までなので、
-        // s[n] - s[n-k] で計算される。
-        // よって、iは n-k まで (つまり i <= n-k) で良い。
-        for (int i = 0; i <= n - k; i++){ // ★修正点: ループ条件を i <= n-k に変更 (n-k番目の開始インデックスまで含めるため)
-            // もし s[i+k]-s[i] が maxSum より大きければ
-            if (s[i+k] - s[i] > maxSum){ // 比較演算子 > を使用
-            // maxSum を s[i+k]-s[i] で更新
-                maxSum = s[i+k] - s[i]; // ★修正点: 代入演算子 = を使用
-            }
-        }
-        // maxSum を出力
-        System.out.println(maxSum);
-
-        sc.close(); // Scannerを閉じる
+        // ここにコードを書く
     }
 }
-
-
