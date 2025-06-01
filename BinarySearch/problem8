@@ -18,9 +18,16 @@ public class Main {
         }
 
         // 変数 left, right をそれぞれ 0 と 5001 で初期化
-
+        int left = 0;
+        int right = 5001;
+        
         // 50 回繰り返すループを作成
+        for (int t = 0; t < 50; t++) {
+        
         // 変数 mid に (left + right) / 2 を代入
+int mid = (left + right) / 2;
+            if (mid == 0) break;  // 安全対
+        }
 
         // 長さ n の配列 tmp を作成
         // i を 0 から n - 1 まで繰り返す
