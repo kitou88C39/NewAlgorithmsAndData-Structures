@@ -3,12 +3,13 @@ import java.util.Arrays;
 
 public class Main {
 
+    // lowerBound 関数は既に正しく実装されていますが、mid の計算にオーバーフロー対策を追加
     static int lowerBound(int[] a, int n, int x) {
-
         int left = 0, right = n;
 
         while (left != right) {
-            int mid = (left + right) / 2;
+            // オーバーフロー対策のため、mid の計算を left + (right - left) / 2 に変更
+            int mid = left + (right - left) / 2; 
 
             if (a[mid] >= x) {
                 right = mid;
@@ -16,43 +17,43 @@ public class Main {
                 left = mid + 1;
             }
         }
-
         return left;
     }
 
     // 関数 upperBound(a, n, y) を定義
-    int upperBound(int[]a, int n, int y){
+    // static を追加して main メソッドから直接呼び出せるようにする
+    // mid の計算にオーバーフロー対策を追加
+    static int upperBound(int[] a, int n, int y) { // 引数名を x から y に変更 (混乱を避けるため)
 
-    // 変数 left, right をそれぞれ 0 と n で初期化
-    int left = 0, right = n;
-    
-    // left と right が一致しない間
-    while (left != right){
+        // 変数 left, right をそれぞれ 0 と n で初期化
+        int left = 0; // int 型の宣言が必要
+        int right = n; // int 型の宣言が必要
+        
+        // left と right が一致しない間 (探索範囲がなくなるまで)
+        while (left != right) { // この while ループは upperBound メソッドの内部になければならない
 
-    // 変数 mid に (left + right) / 2 を代入
-    int mid = (left + right) / 2;
+            // 変数 mid に (left + right) / 2 を代入
+            // オーバーフロー対策のため、mid の計算を left + (right - left) / 2 に変更
+            int mid = left + (right - left) / 2;
 
-    // もし a[mid] が y より大きいなら
-    if (a[mid] > y){
-
-    // right を mid で更新
-    right = mid;
-    
-    // そうでなければ
-    } else {
-
-    // left を mid + 1 で更新
-    left = mid + 1;
+            // もし a[mid] が y より大きいなら
+            if (a[mid] > y) { // lowerBound は >= x, upperBound は > y
+                // mid は条件を満たす候補。より小さいインデックスがないか左半分を探索
+                right = mid;
+            } 
+            // そうでなければ (a[mid] が y 以下なら)
+            else {
+                // y は mid の右側にあるはずなので、左端を mid + 1 に更新して右半分を探索
+                left = mid + 1;
+            }
+        }
+        // ループを抜けたときの left の値が、y より大きい最初の要素のインデックス
+        // (または、y が全ての要素以上の場合 n を示す)
+        return left; // この return 文も upperBound メソッドの内部になければならない
     }
 
-    }
 
-    }
-    // left を返す
-    return left;
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) { // main メソッドの定義
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -62,7 +63,8 @@ public class Main {
             a[i] = sc.nextInt();
         }
 
-        // 配列 a を昇順にソート
+        // 配列 a を昇順にソート (問題文に明示されていませんが、二分探索には必須です)
+        Arrays.sort(a);
 
         int q = sc.nextInt();
 
@@ -72,7 +74,12 @@ public class Main {
             r[i] = sc.nextInt();
 
             // upperBound(a, n, r[i]) - lowerBound(a, n, l[i]) を出力
-        System.out.println(upperBound(a, n, r[i]) - lowerBound(a, n, l[i]) )
+            // 区間 [L, R] に含まれる要素の個数は、
+            // R 以下の要素の個数から L 未満の要素の個数を引くことで求められます。
+            // upperBound(a, n, R) は R 以下の要素の個数。
+            // lowerBound(a, n, L) は L 以上の要素のインデックス (つまり L 未満の要素の個数)。
+            System.out.println(upperBound(a, n, r[i]) - lowerBound(a, n, l[i])); // セミコロンを追加
         }
+        sc.close(); // Scanner を閉じる
     }
 }
