@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(), k = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        // 変数 left, right をそれぞれ 0 と 10001 で初期化
+
+        // 50 回繰り返すループを作成
+        // 変数 mid に (left + right) / 2 を代入
+        // 切り出せる本数を表す変数 num を 0 で初期化
+
+        // i を 0 から n - 1 まで繰り返す
+        // num に a[i] / mid の整数部分を足す
+
+        // もし num が k 以上なら
+        // left を mid で更新
+        // そうでなければ
+        // right を mid で更新
+
+        // left を出力
+    }
+}
