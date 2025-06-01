@@ -14,10 +14,12 @@ public class Main {
         }
 
         // 累積和を格納する長さ n+1 の配列 s を 0 で初期化
+        int[] s = new int[n+1];
         // i を 0 から n-1 まで繰り返す
+        for(int i = 0; i < n; i)
         // s[i+1] に s[i] + a[i] を代入
-
-
+        s[i+1] = s[i] + a[i];
         // s[y+1] - s[x] を出力
+        System.out.println(s[y+1] - s[x]);
     }
 }
