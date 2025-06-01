@@ -1,10 +1,35 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.Arrays; // Arrays.sort() を使用するためにインポート
 
 public class Main {
 
+    // 関数 upperBound(a, n, x) を定義
+    // 配列 a は昇順にソートされていることを前提とします。
+    // a に含まれる、値が x 以下である要素の個数を返します。
+    // (これは、値が x より大きい最初の要素のインデックスに相当します)
     static int upperBound(int[] a, int n, int x) {
-        // ここにコードを書く
+        int left = 0;       // 探索範囲の左端（含む）
+        int right = n;      // 探索範囲の右端（含まない、つまり配列の末尾の次）
+        int ans = n;        // 見つかった場合のインデックス、デフォルトはn（全てより小さい場合）
+
+        // left と right が交差するまで探索を続ける
+        while (left < right) {
+            int mid = left + (right - left) / 2; // 中央のインデックスを計算 (オーバーフロー対策)
+
+            // a[mid] が x より大きい場合、mid は条件を満たす候補である
+            // さらに小さいインデックスがあるかもしれないので、ans に mid を記録し、rightをmidに設定して左半分を再探索
+            if (a[mid] > x) { // ここが lowerBound との唯一の条件の違い
+                ans = mid;
+                right = mid;
+            } 
+            // a[mid] が x 以下の場合、mid は条件を満たさない
+            // x は mid の右側にあるはずなので、left を mid + 1 に設定して右半分を探索
+            else { // a[mid] <= x
+                left = mid + 1;
+            }
+        }
+        // 探索が終了したとき、ans には条件を満たす最初の要素のインデックス（または n）が格納されている
+        return ans;
     }
 
     public static void main(String[] args) {
@@ -17,6 +42,7 @@ public class Main {
             a[i] = sc.nextInt();
         }
 
+        // 配列 a を昇順にソート（問題文の入力例はソートされていないので、ここでソートする）
         Arrays.sort(a);
 
         int q = sc.nextInt();
@@ -24,7 +50,9 @@ public class Main {
         int[] k = new int[q];
         for (int i = 0; i < q; i++) {
             k[i] = sc.nextInt();
-            System.out.println( /* ここにコードを書く */ );
+            // k[i] 以下である要素の個数は、upperBound(a, n, k[i]) の結果がそのまま個数になる
+            System.out.println(upperBound(a, n, k[i]));
         }
+        sc.close(); // Scannerを閉じる
     }
 }
