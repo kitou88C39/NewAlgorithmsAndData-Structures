@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n, k;
+        n = sc.nextInt();
+        k = sc.nextInt();
+
+        int[] a = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        // 現在の右端を表す変数 r, 現在の総和を表す変数 sum, 答えを表す変数 length を 0 で初期化
+        // 左端 l を 0 から n - 1 まで繰り返す
+
+        // r が n より小さく、sum に a[r] を加えても k を超えない間
+        // sum に a[r] を加えて右端 r を 1 ずつ増やす
+
+        // もし r - l が length よりも大きければ
+        // length を r - l で更新
+
+        // もし l が r と同じなら
+        // r を 1 増やす
+        // そうでなければ
+        // sum から a[l] を引く
+
+        // length を出力
+    }
+}
