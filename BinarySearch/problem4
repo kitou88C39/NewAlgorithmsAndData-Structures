@@ -21,11 +21,22 @@ public class Main {
     }
 
     // 関数 upperBound(a, n, y) を定義
+    int upperBound(int[]a, int n, int y){
 
     // 変数 left, right をそれぞれ 0 と n で初期化
-
+    int left = 0, right = n;
+    
     // left と right が一致しない間
+    while (left != right){
+
     // 変数 mid に (left + right) / 2 を代入
+    int mid = (left + right) / 2;
+
+    }
+    
+    }
+
+
 
     // もし a[mid] が y より大きいなら
     // right を mid で更新
