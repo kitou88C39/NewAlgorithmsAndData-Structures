@@ -15,10 +15,19 @@ public class Main {
         }
 
         // 現在の右端を表す変数 r, 現在の総和を表す変数 sum, 答えを表す変数 count を 0 で初期化
+        int r = 0, sum = 0, count = 0;
+        
         // 左端 l を 0 から n - 1 まで繰り返す
+        for (int l = 0; l < n; l){
+        
+        }
 
         // r が n より小さく、sum に a[r] を加えても k を超えない間
+        while ( r < n && sum + a[r] <= k) {
         // sum に a[r] を加えて右端 r を 1 ずつ増やす
+            sum += a[r];
+            r++;
+        }
         // r - l を count に加える
 
         // もし l が r と同じなら
@@ -27,5 +36,6 @@ public class Main {
         // sum から a[l] を引く
 
         // count を出力
+        
     }
 }
