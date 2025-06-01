@@ -12,12 +12,11 @@ public class Main {
         }
 
         int left = 0;
-        int right = 100001;  // 十分大きく（a[i] の最大値以上）
+        int right = 100001;  // パイプの最大長 + 1
 
-        // 二分探索で最大長を探す
         for (int t = 0; t < 50; t++) {
             int mid = (left + right) / 2;
-            if (mid == 0) break; // 0 で割らないように保険
+            if (mid == 0) break;  // 安全対策（0割防止）
 
             int count = 0;
             for (int i = 0; i < n; i++) {
@@ -25,9 +24,9 @@ public class Main {
             }
 
             if (count >= k) {
-                left = mid; // 切れる本数が足りているので長さを伸ばす
+                left = mid;
             } else {
-                right = mid; // 足りないので長さを短くする
+                right = mid;
             }
         }
 
