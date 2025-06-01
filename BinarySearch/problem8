@@ -53,10 +53,16 @@ public class Main {
         }
 
         // もし sum が 0 以上なら
+        if (sem >= 0){
         // left を mid で更新
+            left = mid;
         // そうでなければ
+        } else {
         // right を mid で更新
-
+            right = mid;
+        }
+        
         // left を出力
+        System.out.println(left);
     }
 }
