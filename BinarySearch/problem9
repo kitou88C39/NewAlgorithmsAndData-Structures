@@ -1,8 +1,35 @@
 import java.util.Scanner;
 import java.util.Arrays;
-import java.util.Collections;
+// CollectionsはArrayListなどのコレクションフレームワーク用です。
+// プリミティブ配列のソートにはArrays.sort()を使います。
 
 public class Main {
+
+    // check(X) 関数: 平均価値が X 以下となるように k 個の財宝を選べるか判定
+    // X: 判定対象の平均価値
+    // n: 財宝の総数
+    // k: 選ぶ財宝の個数
+    // w: 各財宝の重さ配列
+    // v: 各財宝の価値配列
+    static boolean check(double X, int n, int k, int[] w, int[] v) {
+        // 各財宝について、v_i - X * w_i の値を計算し、新しい配列 c に格納
+        double[] c = new double[n];
+        for (int i = 0; i < n; i++) {
+            c[i] = v[i] - X * w[i];
+        }
+
+        // c の値を昇順にソートする
+        Arrays.sort(c);
+
+        // 最小の k 個の c_i の値の合計を計算
+        double currentSum = 0;
+        for (int i = 0; i < k; i++) {
+            currentSum += c[i];
+        }
+
+        // 合計が 0 以下であれば、X は達成可能であると判定し true を返す
+        return currentSum <= 0;
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -17,33 +44,37 @@ public class Main {
             v[i] = sc.nextInt();
         }
 
-        double left = 0.0;
-        double right = 1e6;
+        // ここにコードを書く
 
-        for (int t = 0; t < 50; t++) {
-            double mid = (left + right) / 2;
+        // 二分探索の範囲を設定
+        // 最小の平均価値は 0.0
+        // 最大の平均価値は、v_i の最大値（例：10^9）よりも大きくならない
+        // 1e9 + 7 は、十分大きな上限値としてよく使われる（入力値の最大を考慮）
+        double low = 0.0;
+        double high = 1e9 + 7; // 例えば、max(v_i) / min(w_i) が最大値
 
-            // v[i] - mid * w[i] を格納
-            Double[] tmp = new Double[n];
-            for (int i = 0; i < n; i++) {
-                tmp[i] = v[i] - mid * w[i];
-            }
+        // 最終的な答えを格納する変数
+        double ans = 0.0;
 
-            Arrays.sort(tmp, Collections.reverseOrder());
+        // 精度を確保するため、十分な回数（例: 100回）二分探索を繰り返す
+        // 100回繰り返せば、通常 double 型で要求される精度は満たされる
+        for (int iter = 0; iter < 100; iter++) {
+            double mid = (low + high) / 2.0; // 中央値を計算
 
-            double sum = 0;
-            for (int i = 0; i < k; i++) {
-                sum += tmp[i];
-            }
-
-            if (sum <= 0) {
-                right = mid; // 平均価値をもっと小さくできる
+            // check 関数を呼び出し、mid が達成可能かどうかを判定
+            if (check(mid, n, k, w, v)) {
+                // mid が達成可能なら、さらに小さい値を探せる可能性がある
+                ans = mid;  // 現在の mid を暫定の答えとして記録
+                high = mid; // 探索範囲を左半分に絞る
             } else {
-                left = mid;  // 平均価値を大きくしないと条件を満たさない
+                // mid が達成不可能なら、より大きい値を探す必要がある
+                low = mid;  // 探索範囲を右半分に絞る
             }
         }
+        
+        // 最終的に得られた ans の小数点以下を切り捨てて整数で出力
+        System.out.println((int) Math.floor(ans));
 
-        // 答えは floor で整数化（小数点以下切り捨て）
-        System.out.println((int)Math.floor(right));
+        sc.close(); // Scanner オブジェクトを閉じる
     }
 }
