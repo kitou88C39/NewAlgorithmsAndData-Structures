@@ -17,6 +17,11 @@ public class Main {
                 a[i][j] = sc.nextInt();
             }
         }
+        if (!sc.hasNextInt()) {
+            System.out.println("入力が不足しています");
+            return;
+}
+
 
         // 累積和をとる二次元配列 s を 0 で初期化
         int[][] s = new int[n + 1][m + 1];
