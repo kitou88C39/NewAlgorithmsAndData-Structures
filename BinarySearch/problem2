@@ -4,10 +4,16 @@ import java.util.Arrays;
 public class Main {
 
     // 関数 lowerBound(a, n, x) を定義
+    static int lowerBound(int[] a, int n, int x) {
 
     // 変数 left, right をそれぞれ 0 と n で初期化
-
+    left = 0
+    right = n
+    }
     // left と right が一致しない間
+    while (left < right){
+
+    }
     // 変数 mid に (left + right) / 2 を代入
 
     // もし a[mid] が x 以上なら
