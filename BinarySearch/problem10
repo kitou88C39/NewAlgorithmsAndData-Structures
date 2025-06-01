@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
 
@@ -7,29 +8,37 @@ public class Main {
 
         int l = sc.nextInt(), n = sc.nextInt(), k = sc.nextInt();
 
-        int[] a = new int[k]; // 配列 a のサイズを k + 1 に修正
+        int[] a = new int[k + 1];
         for (int i = 0; i < k; i++) {
             a[i] = sc.nextInt();
         }
+        a[k] = l; // 配列の末尾に l を追加
 
-        // 配列の末尾に l を追加
+        Arrays.sort(a); // 昇順にソートしておく
 
-        // 変数 left, right をそれぞれ 0 と l + 1 で初期化
+        int left = 0;
+        int right = l + 1;
 
-        // left と right の差が 1 でない間
-        // 変数 mid に (left + right) / 2 を代入
+        while (right - left > 1) {
+            int mid = (left + right) / 2;
 
-        // 前回の切れ目の位置を表す変数 last と切り分けた個数を表す変数 count を 0 で初期化
+            int last = 0;
+            int count = 0;
 
-        // i を 0 から k まで繰り返す
-        // もし a[i] - last が mid 以上なら
-        // last に a[i] を代入し、count を 1 増やす
+            for (int i = 0; i <= k; i++) {
+                if (a[i] - last >= mid) {
+                    count++;
+                    last = a[i];
+                }
+            }
 
-        // もし count が n 以上なら
-        // left を mid で更新
-        // そうでなければ
-        // right を mid で更新
+            if (count >= n + 1) {
+                left = mid;
+            } else {
+                right = mid;
+            }
+        }
 
-        // left を出力
+        System.out.println(left);
     }
 }
