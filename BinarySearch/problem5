@@ -4,36 +4,28 @@ import java.util.Arrays;
 public class Main {
 
     static int lowerBound(int[] a, int n, int x) {
-
         int left = 0, right = n;
-
         while (left != right) {
             int mid = (left + right) / 2;
-
             if (a[mid] >= x) {
                 right = mid;
             } else {
                 left = mid + 1;
             }
         }
-
         return left;
     }
 
     static int upperBound(int[] a, int n, int y) {
-
         int left = 0, right = n;
-
         while (left != right) {
             int mid = (left + right) / 2;
-
             if (a[mid] > y) {
                 right = mid;
             } else {
                 left = mid + 1;
             }
         }
-
         return left;
     }
 
@@ -55,7 +47,13 @@ public class Main {
         for (int i = 0; i < q; i++) {
             l[i] = sc.nextInt();
             r[i] = sc.nextInt();
-            System.out.println( /* ここにコードを書く */ );
+
+            int countLessEqualL = lowerBound(a, n, l[i] + 1);   // l[i] 以下の個数
+            int countGreaterEqualR = n - upperBound(a, n, r[i]); // r[i] 以上の個数
+
+            System.out.println(countLessEqualL + countGreaterEqualR);
         }
+
+        sc.close();
     }
 }
