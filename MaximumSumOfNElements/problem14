@@ -36,10 +36,18 @@ public class Main {
         length = r - l;
         }
         // もし l が r と同じなら
+        if ( l == r) {
         // r を 1 増やす
+            r++;
         // そうでなければ
+        } else {
         // sum から a[l] を引く
+        sum -= a[l];
+        }
+            l++
+        }
 
         // length を出力
+        System.out.println(length);
     }
 }
