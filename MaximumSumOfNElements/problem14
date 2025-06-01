@@ -27,13 +27,14 @@ public class Main {
         // sum に a[r] を加えて右端 r を 1 ずつ増やす
         sum += a[r];
         r+++
-        } 
-
-
+        }
 
         // もし r - l が length よりも大きければ
-        // length を r - l で更新
+        if ( r - l > length ){
 
+        // length を r - l で更新
+        length = r - l;
+        }
         // もし l が r と同じなら
         // r を 1 増やす
         // そうでなければ
