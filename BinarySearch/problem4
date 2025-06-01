@@ -32,18 +32,29 @@ public class Main {
     // 変数 mid に (left + right) / 2 を代入
     int mid = (left + right) / 2;
 
-    }
-    
-    }
-
-
-
     // もし a[mid] が y より大きいなら
-    // right を mid で更新
-    // そうでなければ
-    // left を mid + 1 で更新
+    if (a[mid] > y){
 
+    // right を mid で更新
+    right = mid;
+    
+    // そうでなければ
+    } else {
+
+    // left を mid + 1 で更新
+    left = mid + 1;
+    }
+
+    }
+
+    }
     // left を返す
+    return left;
+    }
+
+
+
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
