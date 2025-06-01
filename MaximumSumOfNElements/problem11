@@ -21,19 +21,74 @@ public class Main {
         m = sc.nextInt();
         q = sc.nextInt();
 
-        // ここにコードを書く
+        // ここにコードを書く (1. 2D差分配列の初期化)
+        // 差分を記録するための二次元配列。サイズは (n+1) x (m+1) とする。
+        // Javaではint配列はデフォルトで0で初期化される
+        int[][] diff = new int[n + 1][m + 1];
 
         for (int i = 0; i < q; i++) {
-            int x1, y1, x2, y2, x;
+            int x1, y1, x2, y2, val; // 変数名をxからvalに変更して衝突を避ける
             x1 = sc.nextInt();
             y1 = sc.nextInt();
             x2 = sc.nextInt();
             y2 = sc.nextInt();
-            x = sc.nextInt();
+            val = sc.nextInt(); // 変更された変数名
 
-            // ここにコードを書く
+            // ここにコードを書く (2. 各クエリの差分配列への適用)
+            // (x1, y1) に val を加算
+            diff[x1][y1] += val;
+
+            // (x1, y2+1) から val を減算 (行方向の影響を打ち消す)
+            if (y2 + 1 < m + 1) { // y2+1 が diff の列範囲内にあるかチェック
+                diff[x1][y2 + 1] -= val;
+            }
+
+            // (x2+1, y1) から val を減算 (列方向の影響を打ち消す)
+            if (x2 + 1 < n + 1) { // x2+1 が diff の行範囲内にあるかチェック
+                diff[x2 + 1][y1] -= val;
+            }
+
+            // (x2+1, y2+1) に val を加算 (二重に減算された分を補償)
+            if (x2 + 1 < n + 1 && y2 + 1 < m + 1) { // 両方が範囲内にあるかチェック
+                diff[x2 + 1][y2 + 1] += val;
+            }
         }
 
-        // ここにコードを書く
+        // ここにコードを書く (3. 差分配列から最終的な配列を復元)
+        // 最終的な配列 a を格納
+        int[][] finalArrayA = new int[n][m];
+
+        // まず、行方向に累積和を計算
+        // diff[i][j] には diff[i][j-1] を加算
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) { // j = 0 の場合は diff[i][0] がそのまま
+                if (j > 0) {
+                    diff[i][j] += diff[i][j-1];
+                }
+            }
+        }
+
+        // 次に、列方向に累積和を計算
+        // diff[i][j] には diff[i-1][j] を加算
+        for (int j = 0; j < m; j++) {
+            for (int i = 0; i < n; i++) { // i = 0 の場合は diff[0][j] がそのまま
+                if (i > 0) {
+                    diff[i][j] += diff[i-1][j];
+                }
+            }
+        }
+        
+        // 復元された値を finalArrayA にコピー
+        // diff の 0..n-1, 0..m-1 の部分が実際の値
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                finalArrayA[i][j] = diff[i][j];
+            }
+        }
+
+        // 最終的な配列 a を出力
+        print2DArray(finalArrayA, n, m);
+
+        sc.close(); // Scannerを閉じる
     }
 }
