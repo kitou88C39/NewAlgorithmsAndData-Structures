@@ -17,6 +17,33 @@ public class Main {
             v[i] = sc.nextInt();
         }
 
-        // ここにコードを書く
+        double left = 0.0;
+        double right = 1e6;
+
+        for (int t = 0; t < 50; t++) {
+            double mid = (left + right) / 2;
+
+            // v[i] - mid * w[i] を格納
+            Double[] tmp = new Double[n];
+            for (int i = 0; i < n; i++) {
+                tmp[i] = v[i] - mid * w[i];
+            }
+
+            Arrays.sort(tmp, Collections.reverseOrder());
+
+            double sum = 0;
+            for (int i = 0; i < k; i++) {
+                sum += tmp[i];
+            }
+
+            if (sum <= 0) {
+                right = mid; // 平均価値をもっと小さくできる
+            } else {
+                left = mid;  // 平均価値を大きくしないと条件を満たさない
+            }
+        }
+
+        // 答えは floor で整数化（小数点以下切り捨て）
+        System.out.println((int)Math.floor(right));
     }
 }
