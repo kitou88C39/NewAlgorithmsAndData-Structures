@@ -52,10 +52,6 @@ public class Main {
     return left;
     }
 
-
-
-
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -76,6 +72,7 @@ public class Main {
             r[i] = sc.nextInt();
 
             // upperBound(a, n, r[i]) - lowerBound(a, n, l[i]) を出力
+        System.out.println(upperBound(a, n, r[i]) - lowerBound(a, n, l[i]) )
         }
     }
 }
