@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class Main {
+
+    static boolean binarySearch(int n, int x, int[] a) {
+
+        // 変数 left, right をそれぞれ 0 と n - 1 で初期化
+        int left = 0, right = n - 1;
+
+        // right が left 以上である間
+        while (right >= left) {
+        // 変数 mid に (left + right) / 2 を代入
+            int mid = (left + right) / 2;
+        }
+
+
+        // もし a[mid] が x に等しいなら
+        if (a[mid] == x){
+        // true を返す
+            return true;
+        // もし a[mid] が x より大きいなら
+        } else if (a[mid] > x){
+        // right に mid - 1 を代入
+            right = mid - 1;
+        // そうでなければ
+        // left に mid + 1 を代入
+        } else {
+            left = mid + 1;
+        // false を返す
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(), x = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        System.out.println(binarySearch(n, x, a) ? "Yes" : "No");
+    }
+}
