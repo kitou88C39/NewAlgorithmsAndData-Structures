@@ -17,52 +17,34 @@ public class Main {
             v[i] = sc.nextInt();
         }
 
-        // 変数 left, right をそれぞれ 0 と 5001 で初期化
         int left = 0;
         int right = 5001;
-        
-        // 50 回繰り返すループを作成
+
         for (int t = 0; t < 50; t++) {
-        
-        // 変数 mid に (left + right) / 2 を代入
             int mid = (left + right) / 2;
-            if (mid == 0) break;  // 安全対策（0割防止）
+            if (mid == 0) break;
+
+            // tmpはint[]ではなく、Integer[]（ラッパークラス）にする必要がある
+            Integer[] tmp = new Integer[n];
+
+            for (int i = 0; i < n; i++) {
+                tmp[i] = v[i] - mid * w[i];
+            }
+
+            Arrays.sort(tmp, Collections.reverseOrder());
+
+            int sum = 0;
+            for (int i = 0; i < k; i++) {
+                sum += tmp[i];
+            }
+
+            if (sum >= 0) {
+                left = mid;
+            } else {
+                right = mid;
+            }
         }
 
-        // 長さ n の配列 tmp を作成
-        int[] tmp = new int[n];
-
-        // i を 0 から n - 1 まで繰り返す
-        for (int i = 0; i < n; i++) {
-        
-        // tmp[i] に v[i] - mid * w[i] を代入
-        tmp[i] = v[i] - mid * w[i]
-        
-        // tmp を大きい順にソート
-        Arrays.sort(tem, Collections.reverseOrder());
-        
-        }
-
-        // 変数 sum を 0 で初期化
-        int sum = 0;
-        // i を 0 から k - 1 まで繰り返す
-        for (int i = 0; i < k; i++) {
-        
-        // sum に tmp[i] を足す
-        sum += tem[i];
-        }
-
-        // もし sum が 0 以上なら
-        if (sem >= 0){
-        // left を mid で更新
-            left = mid;
-        // そうでなければ
-        } else {
-        // right を mid で更新
-            right = mid;
-        }
-        
-        // left を出力
         System.out.println(left);
     }
 }
