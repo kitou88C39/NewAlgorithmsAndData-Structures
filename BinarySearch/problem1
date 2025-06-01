@@ -4,6 +4,34 @@ public class Main {
 
     static int binarySearch(int[] a, int n, int x) {
         // ここにコードを書く
+
+        // 探索範囲の左端を表すポインタ
+        int left = 0;
+        // 探索範囲の右端を表すポインタ
+        int right = n - 1;
+
+        // 探索範囲が有効である間 (left <= right) ループを続ける
+        while (left <= right) {
+            // 中央のインデックスを計算
+            // int mid = (left + right) / 2; // これでも動くが、left+rightがintの最大値を超える可能性を考慮し、
+            int mid = left + (right - left) / 2; // オーバーフロー対策のためこの計算式が推奨される
+
+            // 中央の要素が x と一致する場合
+            if (a[mid] == x) {
+                return mid; // そのインデックスを返す
+            } 
+            // 中央の要素が x より小さい場合 (x は右半分にある可能性がある)
+            else if (a[mid] < x) {
+                left = mid + 1; // 探索範囲を右半分に絞る
+            } 
+            // 中央の要素が x より大きい場合 (x は左半分にある可能性がある)
+            else { // a[mid] > x
+                right = mid - 1; // 探索範囲を左半分に絞る
+            }
+        }
+
+        // ループを抜けた場合、要素 x は配列内に見つからなかった
+        return -1;
     }
 
     public static void main(String[] args) {
@@ -17,5 +45,6 @@ public class Main {
         }
 
         System.out.println(binarySearch(a, n, x));
+        sc.close(); // Scannerを閉じる
     }
 }
