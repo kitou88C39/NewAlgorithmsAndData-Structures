@@ -55,6 +55,5 @@ public class Main {
 
         int k = sc.nextInt();
 
-        // ここにコードを書く
     }
 }
