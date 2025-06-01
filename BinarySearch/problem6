@@ -12,9 +12,15 @@ public class Main {
         }
 
         // 変数 left, right をそれぞれ 0 と 10001 で初期化
+        int left = 0;
+        int right = 10001;
 
         // 50 回繰り返すループを作成
+        for (int i = 0; i < 50; i++) {
         // 変数 mid に (left + right) / 2 を代入
+        int mid = (left + right) / 2;
+        }
+
         // 切り出せる本数を表す変数 num を 0 で初期化
 
         // i を 0 から n - 1 まで繰り返す
