@@ -1,0 +1,42 @@
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt(), k = sc.nextInt();
+
+        int[] w = new int[n], v = new int[n];
+        for (int i = 0; i < n; i++) {
+            w[i] = sc.nextInt();
+        }
+        for (int i = 0; i < n; i++) {
+            v[i] = sc.nextInt();
+        }
+
+        // 変数 left, right をそれぞれ 0 と 5001 で初期化
+
+        // 50 回繰り返すループを作成
+        // 変数 mid に (left + right) / 2 を代入
+
+        // 長さ n の配列 tmp を作成
+        // i を 0 から n - 1 まで繰り返す
+        // tmp[i] に v[i] - mid * w[i] を代入
+
+        // tmp を大きい順にソート
+
+        // 変数 sum を 0 で初期化
+        // i を 0 から k - 1 まで繰り返す
+        // sum に tmp[i] を足す
+
+        // もし sum が 0 以上なら
+        // left を mid で更新
+        // そうでなければ
+        // right を mid で更新
+
+        // left を出力
+    }
+}
