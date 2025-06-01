@@ -22,9 +22,14 @@ public class Main {
         }
 
         // 切り出せる本数を表す変数 num を 0 で初期化
+        int num = 0;
 
         // i を 0 から n - 1 まで繰り返す
+        for (int i = 0; i < n; i++) {
         // num に a[i] / mid の整数部分を足す
+        num += a[i] / mid;
+        }
+
 
         // もし num が k 以上なら
         // left を mid で更新
