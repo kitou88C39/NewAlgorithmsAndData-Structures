@@ -1,17 +1,106 @@
 import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet; // 重複を効率的に除去するため
 
 public class Main {
+
+    // check(X) 関数:
+    // 各ピースの長さが X cm 以下になるように太巻きを切ったとき、
+    // n 個以上のピースに分けられるかを判定します。
+    // （必要な切れ目の数が n-1 個以下で済むか）
+    static boolean check(int X, int l, int n, int k, int[] a) {
+        // 全ての可能な切れ目の位置を HashSet に集めて重複を除去
+        HashSet<Integer> uniquePointsSet = new HashSet<>();
+        uniquePointsSet.add(0); // 始点
+        for (int cutPoint : a) {
+            uniquePointsSet.add(cutPoint);
+        }
+        uniquePointsSet.add(l); // 終点
+
+        // HashSet から ArrayList に移し、ソートする
+        ArrayList<Integer> points = new ArrayList<>(uniquePointsSet);
+        Collections.sort(points);
+
+        int cutsNeeded = 0; // 必要な切れ目の数
+        int currentSegmentStart = 0; // 現在のピースの開始位置
+
+        // ソートされた切れ目の位置を順に見ていく
+        for (int i = 0; i < points.size(); i++) {
+            int currentPoint = points.get(i);
+            
+            // 現在のピースの長さが X を超える場合
+            // (currentSegmentStart から currentPoint までの長さが X を超えた)
+            if (currentPoint - currentSegmentStart > X) {
+                // この時点で、一つ前の切れ目 (points.get(i-1)) で切る必要があったことを意味する
+
+                // もし、現在見ている切れ目と直前の切れ目の間の長さが既に X を超える場合
+                // (points.get(i) - points.get(i-1) が X を超える場合)
+                // これは、どんなに細かく切っても X 以下にできないことを意味するので、X は不可能
+                if (points.get(i) - points.get(i-1) > X) {
+                    return false; 
+                }
+                
+                // 必要な切れ目の数を増やし、新しいピースの開始位置を更新
+                cutsNeeded++;
+                currentSegmentStart = points.get(i-1); // 最後に切った位置を更新
+
+                // 更新した currentSegmentStart から currentPoint までの長さが
+                // まだ X を超える場合（稀だが、考慮すべき）
+                // これは、例えば currentSegmentStart が非常に小さく、
+                // points.get(i-1) でもまだ十分な長さが確保できない場合など。
+                // (これは通常、上の if (points.get(i) - points.get(i-1) > X) で検出される)
+                if (currentPoint - currentSegmentStart > X) {
+                    return false; // この X では不可能
+                }
+            }
+        }
+        
+        // 必要な切れ目の数が n-1 個以下であれば、n 個以上のピースを作れる
+        // （n-1 個の切れ目でちょうど n 個のピースができる）
+        return cutsNeeded <= n - 1;
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         int l = sc.nextInt(), n = sc.nextInt(), k = sc.nextInt();
 
-        int[] a = new int[k]; // 必要に応じて変更する
+        int[] a = new int[k]; 
         for (int i = 0; i < k; i++) {
             a[i] = sc.nextInt();
         }
 
         // ここにコードを書く
+
+        // 二分探索の範囲を設定
+        // low: 最も短いピースの長さ (最小で1cm)
+        // high: 最も長いピースの長さ (最大で太巻き全体の長さ l)
+        int low = 1;
+        int high = l;
+        int ans = l; // 答えの初期値は最大値 l に設定
+
+        // 二分探索のループ
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // 中央値を計算 (オーバーフロー対策)
+
+            // check 関数を呼び出し、mid の長さで n 個以上に切れるかを判定
+            if (check(mid, l, n, k, a)) {
+                // mid の長さで切れる場合、mid は有効な答え候補
+                // より小さい最大の長さを探せるかもしれないので、ans を mid で更新し、探索範囲を左半分に絞る
+                ans = mid;
+                high = mid - 1; 
+            } else {
+                // mid の長さでは n 個以上に切れない場合
+                // mid は小さすぎるので、より長い値を試す必要がある
+                low = mid + 1; // 探索範囲を右半分に絞る
+            }
+        }
+        
+        // 最終的に見つかった最も長いピースの長さの最小値を出力
+        System.out.println(ans);
+
+        sc.close();
     }
 }
