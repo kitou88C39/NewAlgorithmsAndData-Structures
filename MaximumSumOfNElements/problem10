@@ -43,11 +43,14 @@ public class Main {
             }
         }
 
-
         // j を 0 から m-1 まで繰り返す
+        for (int j = 0; j < m; j++){
         // i を 1 から n-1 まで繰り返す
+            for (int i = 1; i < m; i++){
         // a[i][j] に a[i-1][j] を加算
-
+            a[i][j] += a[i][j-1];
         // a を出力
+        System.out.println(a);
+        }
     }
 }
