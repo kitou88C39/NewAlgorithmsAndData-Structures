@@ -1,36 +1,38 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.Arrays; // Arrays.sort() を使用するためにインポート
 
 public class Main {
 
     // 関数 lowerBound(a, n, x) を定義
-    static int lowerBound(int[] a, int n, int x) {
+    static int lowerBound(int[] a, int n, int x) { // static を追加して main メソッドから直接呼び出せるように
 
-    // 変数 left, right をそれぞれ 0 と n で初期化
-    left = 0, right = n;
+        // 変数 left, right をそれぞれ 0 と n で初期化
+        int left = 0; // int 型の宣言が必要
+        int right = n; // int 型の宣言が必要
+
+        // left と right が一致しない間 (探索範囲がなくなるまで)
+        while (left != right) { // この while ループは lowerBound メソッドの内部になければならない
+            // 変数 mid に (left + right) / 2 を代入
+            int mid = left + (right - left) / 2; // オーバーフロー対策の計算方法を推奨
+
+            // もし a[mid] が x 以上なら
+            if (a[mid] >= x) {
+                // mid は条件を満たす候補。より小さいインデックスがないか左半分を探索
+                right = mid; 
+            } 
+            // そうでなければ (a[mid] が x より小さいなら)
+            else {
+                // x は mid の右側にあるはずなので、左端を mid + 1 に更新して右半分を探索
+                left = mid + 1;
+            }
+        }
+        // ループを抜けたときの left の値が、x 以上である最初の要素のインデックス
+        // または、x が全ての要素より大きい場合は n を示す
+        return left; // この return 文も lowerBound メソッドの内部になければならない
     }
 
-    // left と right が一致しない間
-    while (left != right){
-    // 変数 mid に (left + right) / 2 を代入
-    int mid = (left + right) / 2;
-    // もし a[mid] が x 以上なら
-    if (a[mid] >= x){
-    // right を mid で更新
-    right = mid; 
-    // そうでなければ
-    } else {
-    // left を mid + 1 で更新
-    left =  mid + 1;
-    }
-    }
-    // left を返す
-    return left;
-    }
 
-
-
-    public static void main(String[] args) {
+    public static void main(String[] args) { // main メソッドの定義
         Scanner sc = new Scanner(System.in);
 
         int n = sc.nextInt();
@@ -49,7 +51,11 @@ public class Main {
         for (int i = 0; i < q; i++) {
             k[i] = sc.nextInt();
             // n - lowerBound(a, n, k[i]) を出力
+            // lowerBound が返すのは k[i] 以上の最初の要素のインデックス。
+            // 求めるのは「xより大きい要素の個数」なので、配列の末尾からの距離になる。
+            // (n - そのインデックス) で個数が求まる。
             System.out.println(n - lowerBound(a, n, k[i]));
         }
+        sc.close(); // Scanner を閉じる
     }
 }
