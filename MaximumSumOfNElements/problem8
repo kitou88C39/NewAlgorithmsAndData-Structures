@@ -8,19 +8,28 @@ public class Main {
         n = sc.nextInt();
         x = sc.nextInt();
         y = sc.nextInt();
+
         int[] a = new int[n];
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
 
         // 累積和を格納する長さ n+1 の配列 s を 0 で初期化
-        int[] s = new int[n+1];
-        // i を 0 から n-1 まで繰り返す
-        for(int i = 0; i < n; i) {
-        // s[i+1] に s[i] + a[i] を代入
-        s[i+1] = s[i] + a[i];
+        int[] s = new int[n + 1];
+
+        // 累積和を計算
+        for (int i = 0; i < n; i++) {
+            s[i + 1] = s[i] + a[i];
         }
-        // s[y+1] - s[x] を出力
-        System.out.println(s[y+1] - s[x]);
+
+        // x から y までの和を出力（インデックスは 0 始まり）
+        // 範囲チェック（オプション、必要であれば）
+        if (x < 0 || y >= n || x > y) {
+            System.out.println("範囲エラー");
+        } else {
+            System.out.println(s[y + 1] - s[x]);
+        }
+
+        sc.close(); // Scanner を閉じる
     }
 }
