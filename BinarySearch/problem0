@@ -15,13 +15,20 @@ public class Main {
 
 
         // もし a[mid] が x に等しいなら
+        if (a[mid] == x){
         // true を返す
+            return true;
         // もし a[mid] が x より大きいなら
+        } else if (a[mid] > x){
         // right に mid - 1 を代入
+            right = mid - 1;
         // そうでなければ
         // left に mid + 1 を代入
-
+        } else {
+            left = mid + 1;
         // false を返す
+            return false;
+        }
     }
 
     public static void main(String[] args) {
