@@ -32,10 +32,18 @@ public class Main {
 
 
         // もし num が k 以上なら
+        if (num >= k) {
         // left を mid で更新
+        left = mid;
         // そうでなければ
+        } else {
         // right を mid で更新
+        right = mid;
+        }
+
+        }
 
         // left を出力
+        System.out.println(left);
     }
 }
