@@ -25,15 +25,25 @@ public class Main {
         for (int t = 0; t < 50; t++) {
         
         // 変数 mid に (left + right) / 2 を代入
-int mid = (left + right) / 2;
-            if (mid == 0) break;  // 安全対
+            int mid = (left + right) / 2;
+            if (mid == 0) break;  // 安全対策（0割防止）
         }
 
         // 長さ n の配列 tmp を作成
-        // i を 0 から n - 1 まで繰り返す
-        // tmp[i] に v[i] - mid * w[i] を代入
+        int[] tmp = new int[n];
 
+        // i を 0 から n - 1 まで繰り返す
+        for (int i = 0; i < n; i++) {
+        
+        // tmp[i] に v[i] - mid * w[i] を代入
+        tmp[i] = v[i] - mid * w[i]
+        
         // tmp を大きい順にソート
+        Arrays.sort(tem, Collections.reverseOrder());
+        
+        }
+
+
 
         // 変数 sum を 0 で初期化
         // i を 0 から k - 1 まで繰り返す
