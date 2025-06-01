@@ -8,27 +8,28 @@ public class Main {
         int left = 0, right = n - 1;
 
         // right が left 以上である間
-        while (right >= left) {
-        // 変数 mid に (left + right) / 2 を代入
-            int mid = (left + right) / 2;
+        while (left <= right) { // ★修正点: 条件を left <= right に変更 (一般的な二分探索の書き方)
+                               //これにより、leftとrightが同じ値の時もチェックされる
+            // 変数 mid に (left + right) / 2 を代入
+            int mid = left + (right - left) / 2; // ★修正点: オーバーフロー対策の計算方法
+
+            // もし a[mid] が x に等しいなら
+            if (a[mid] == x) {
+                // true を返す
+                return true;
+            // もし a[mid] が x より大きいなら
+            } else if (a[mid] > x) {
+                // right に mid - 1 を代入 (探索範囲を左半分に絞る)
+                right = mid - 1;
+            // そうでなければ (a[mid] が x より小さいなら)
+            } else { // a[mid] < x
+                // left に mid + 1 を代入 (探索範囲を右半分に絞る)
+                left = mid + 1;
+            }
         }
-
-
-        // もし a[mid] が x に等しいなら
-        if (a[mid] == x){
-        // true を返す
-            return true;
-        // もし a[mid] が x より大きいなら
-        } else if (a[mid] > x){
-        // right に mid - 1 を代入
-            right = mid - 1;
-        // そうでなければ
-        // left に mid + 1 を代入
-        } else {
-            left = mid + 1;
+        // ループを抜けたということは、要素が見つからなかった
         // false を返す
-            return false;
-        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -42,5 +43,6 @@ public class Main {
         }
 
         System.out.println(binarySearch(n, x, a) ? "Yes" : "No");
+        sc.close(); // Scannerを閉じる
     }
 }
