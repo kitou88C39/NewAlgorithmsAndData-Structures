@@ -1,0 +1,76 @@
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class Main {
+    static int lowerBound(int[] a, int n, int x) {
+
+        int left = 0, right = n;
+
+        while (left != right) {
+            int mid = (left + right) / 2;
+
+            if (a[mid] >= x) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
+    }
+
+    static int upperBound(int[] a, int n, int y) {
+
+        int left = 0, right = n;
+
+        while (left != right) {
+            int mid = (left + right) / 2;
+
+            if (a[mid] > y) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+
+        int m = sc.nextInt();
+
+        int[] b = new int[m];
+        for (int i = 0; i < m; i++) {
+            b[i] = sc.nextInt();
+        }
+
+        int k = sc.nextInt();
+
+        // 配列 b を昇順にソート
+
+        // 変数 left, right をそれぞれ -1 と 2000000000 で初期化
+
+        // left と right の差が 1 でない間
+        // 変数 mid に (left + right) / 2 を代入
+
+        // 個数を表す変数 count を 0 で初期化
+        // i を 0 から n - 1 まで繰り返す
+        // upperBound(b, m, a[i] + mid) - lowerBound(b, m, a[i] - mid) を count に加算
+
+        // もし count が k 以上なら
+        // right を mid で更新
+        // そうでなければ
+        // left を mid で更新
+
+        // right を出力
+    }
+}
