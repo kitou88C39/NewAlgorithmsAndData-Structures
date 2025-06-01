@@ -26,7 +26,7 @@ public class Main {
 
         // sum に a[r] を加えて右端 r を 1 ずつ増やす
         sum += a[r];
-        r+++
+            r++;
         }
 
         // もし r - l が length よりも大きければ
@@ -44,7 +44,7 @@ public class Main {
         // sum から a[l] を引く
         sum -= a[l];
         }
-            l++
+            l++;
         }
 
         // length を出力
