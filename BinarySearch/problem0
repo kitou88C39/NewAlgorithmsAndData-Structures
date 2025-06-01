@@ -5,9 +5,14 @@ public class Main {
     static boolean binarySearch(int n, int x, int[] a) {
 
         // 変数 left, right をそれぞれ 0 と n - 1 で初期化
+        int left = 0, right = n - 1;
 
         // right が left 以上である間
+        while (right >= left) {
         // 変数 mid に (left + right) / 2 を代入
+            int mid = (left + right) / 2;
+        }
+
 
         // もし a[mid] が x に等しいなら
         // true を返す
