@@ -17,15 +17,18 @@ public class Main {
     // もし a[mid] が x 以上なら
     if (a[mid] >= x){
     // right を mid で更新
-    
-
-    }
-    }
-
+    right = mid; 
     // そうでなければ
+    } else {
     // left を mid + 1 で更新
-
+    left =  mid + 1;
+    }
+    }
     // left を返す
+    return left;
+    }
+
+
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
